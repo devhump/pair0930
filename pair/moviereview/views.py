@@ -28,22 +28,32 @@ def create(request):
 
 def detail(request, pk):
     review = Review.objects.get(id=pk)
-    title = review.title
-    content = review.content
 
     context = {
-        'title': title,
-        'content': content,
+        'review': review,
     }
 
     return render(request, "moviereview/detail.html", context)
 
-def edit(request, pk):
-    review = Review.objects.get(id=pk)
+def edit(request, pk_):
+    review = Review.objects.get(pk=pk_)
 
     context = {
-        'title': review.title,
-        'content': review.content,
+        'review': review,
     }
 
     return render(request, "moviereview/edit.html", context)
+
+def update(request, pk):
+    review = Review.objects.get(pk=pk)
+
+    review.title = request.GET.get('title')
+    review.content = request.GET.get('content')
+    review.save()
+
+    return redirect('index')
+
+def delete(requst, pk):
+    Review.objects.get(pk=pk).delete()
+
+    return redirect('index')
