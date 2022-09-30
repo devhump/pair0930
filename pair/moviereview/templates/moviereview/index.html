@@ -16,7 +16,7 @@
       {% for review in reviews %}
       <tr>
         <th scope="row">{{ review.pk }}</th>
-        <td>{{ review.title }}</td>
+        <td><a href="{% url 'detail' review.pk %}">{{ review.title }}</a></td>
         <td>{{ review.created_at.year }}년 {{ review.created_at.month }}월 {{ review.created_at.day }}일</td>
       </tr>
       {% endfor %}

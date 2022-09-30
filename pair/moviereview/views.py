@@ -25,3 +25,25 @@ def create(request):
     Review.objects.create(title=title, content=content)
 
     return redirect("index")
+
+def detail(request, pk):
+    review = Review.objects.get(id=pk)
+    title = review.title
+    content = review.content
+
+    context = {
+        'title': title,
+        'content': content,
+    }
+
+    return render(request, "moviereview/detail.html", context)
+
+def edit(request, pk):
+    review = Review.objects.get(id=pk)
+
+    context = {
+        'title': review.title,
+        'content': review.content,
+    }
+
+    return render(request, "moviereview/edit.html", context)
